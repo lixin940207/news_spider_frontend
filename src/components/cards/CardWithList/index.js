@@ -1,10 +1,28 @@
 import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
+import PropTypes from "prop-types";
+import MyArticle from "../../MyArticle";
 
 class CardWithList extends Component {
+    state={
+        articleComponent: undefined,
+    }
+
+    static propTypes ={
+        news: PropTypes.object.isRequired,
+    }
+
+    componentDidMount() {
+        if (this.props.news.article !== undefined){
+            this.setState({articleComponent: <MyArticle article={this.props.news.article}/>})
+        } else{
+            this.setState({articleComponent: ""})
+        }
+    }
+
     render(){
         return (
-            <ProCard bordered style={{width:"240px", height:"240px"}}>
+            <ProCard bordered style={{width:"240px", height:"240px", overflow: "scroll"}}>
                 <div style={{marginLeft: "-25px"}}>
                     <ul>
                         <li>
