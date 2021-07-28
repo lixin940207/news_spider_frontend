@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
+import {Typography} from "antd";
 import PropTypes from "prop-types";
 import '../index.less'
-import ImageComponent from "../ImageComponent";
 import FooterComponent from "../FooterComponent";
+import ImageComponent from "../ImageComponent";
 import HeadlineComponent from "../HeadlineComponent";
 import PopoverComponent from "../PopoverComponent";
-import TimelineComponent from "../TimelineComponent";
+
+const {Paragraph} = Typography;
 
 
-class CardWithImageAndLive extends Component {
+class CardWithImageAndSubtitle extends Component {
     static propTypes = {
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
@@ -21,10 +23,10 @@ class CardWithImageAndLive extends Component {
 
     render() {
         return (
-            <ProCard className="wideCardStyle" ghost bordered hoverable layout="center" direction="row">
+            <ProCard className="wideCardStyle" ghost bordered layout="center" direction="row">
                 <ProCard className="cardStyle">
                     <PopoverComponent article={this.props.news.article} lang={this.props.lang}>
-                        <div style={{margin: "-3px"}}>
+                        <div style={{margin: "-5px"}}>
                             <ImageComponent news={this.props.news}/>
                             <div style={{marginTop: "5px"}}>
                             <HeadlineComponent news={this.props.news} lineNumber={3} lang={this.props.lang}/>
@@ -33,14 +35,18 @@ class CardWithImageAndLive extends Component {
                         </div>
                     </PopoverComponent>
                 </ProCard>
-                <ProCard style={{marginLeft: "-15px", overflowY: "scroll", height: '263px', width: 'auto'}}>
-                    <div style={{marginLeft: "-10px", marginRight: "-10px", height: "180px"}}>
-                        <TimelineComponent news={this.props.news}/>
-                    </div>
+                <ProCard gutter={[0, 8]}
+                         direction="column"
+                         style={{marginLeft: "-20px", width: "auto", height: "262px"}}>
+                    <Paragraph className="subtitle" style={{fontSize: "13px"}}>
+                        {this.props.lang==='ori'?
+                            this.props.news.summary.ori:
+                            (this.props.news.summary.cn?this.props.news.summary.cn:this.props.news.summary.ori)}
+                    </Paragraph>
                 </ProCard>
             </ProCard>
         )
     }
 }
 
-export default CardWithImageAndLive;
+export default CardWithImageAndSubtitle

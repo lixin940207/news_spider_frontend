@@ -39,12 +39,13 @@ class BBCApp extends Component {
     render() {
         console.log(this.state.newsList)
         return (
-            <ProCard title="BBC News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            // <ProCard title="BBC News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            <ProCard ghost gutter={16}>
                 {
                     this.state.newsList.map((news) => {
                         // console.log(news[0].newsType)
                         if (news instanceof Array) {
-                            const Component = React.lazy(() => import('../components/' + news[0].newsType));
+                            const Component = React.lazy(() => import('../components/cards/' + news[0].newsType));
                             return (
                                 // <ProCard ghost>
                                         <ProCard ghost gutter={[0, 8]} direction="column">
@@ -68,7 +69,7 @@ class BBCApp extends Component {
                             )
                         } else {
                             console.log(news)
-                            const Component = React.lazy(() => import('../components/' + news.newsType));
+                            const Component = React.lazy(() => import('../components/cards/' + news.newsType));
                             return (
                                 <ProCard ghost key={news._id}>
                                     <React.Suspense fallback={<div>loading...</div>}>

@@ -1,27 +1,28 @@
-import React, {Component} from 'react';
+import React,{Component} from 'react';
 import ProCard from '@ant-design/pro-card';
 import axios from "axios";
 import {APIs} from '../config'
-const {LeMondeAPI} = APIs
+const {NYTimesAPI} = APIs
 
 
-class LeMondeApp extends Component {
+class NYTimesApp extends Component {
     state = {
         newsList:[],
     }
 
     componentDidMount() {
-        axios.get(LeMondeAPI).then(
+        axios.get(NYTimesAPI).then(
             (response) => {
                 this.setState({newsList: response.data.news})
             })
     }
-    render(){
+    render() {
         return (
-            <ProCard title="LeMonde News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            // <ProCard title="NYTimes News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            <ProCard ghost gutter={16}>
                 {
                     this.state.newsList.map((news)=>{
-                        const Component = React.lazy(() => import('../components/'+news.newsType));
+                        const Component = React.lazy(() => import('../components/cards/'+news.newsType));
                         return (
                             <ProCard ghost key={news._id}>
                                 <React.Suspense fallback={<div>loading...</div>}>
@@ -34,7 +35,6 @@ class LeMondeApp extends Component {
             </ProCard>
         );
     }
-
 }
 
-export default LeMondeApp;
+export default NYTimesApp;

@@ -1,27 +1,28 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import ProCard from '@ant-design/pro-card';
 import axios from "axios";
 import {APIs} from '../config'
-const {LeFigaroAPI} = APIs
+const {LeMondeAPI} = APIs
 
 
-class LeFigaroApp extends Component {
+class LeMondeApp extends Component {
     state = {
         newsList:[],
     }
 
     componentDidMount() {
-        axios.get(LeFigaroAPI).then(
+        axios.get(LeMondeAPI).then(
             (response) => {
                 this.setState({newsList: response.data.news})
             })
     }
-    render() {
+    render(){
         return (
-            <ProCard title="LeFigaro News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            // <ProCard title="LeMonde News" gutter={8} collapsible style={{overflow: "scroll"}}>
+            <ProCard ghost gutter={8}>
                 {
                     this.state.newsList.map((news)=>{
-                        const Component = React.lazy(() => import('../components/'+news.newsType));
+                        const Component = React.lazy(() => import('../components/cards/'+news.newsType));
                         return (
                             <ProCard ghost key={news._id}>
                                 <React.Suspense fallback={<div>loading...</div>}>
@@ -34,6 +35,7 @@ class LeFigaroApp extends Component {
             </ProCard>
         );
     }
+
 }
 
-export default LeFigaroApp;
+export default LeMondeApp;
