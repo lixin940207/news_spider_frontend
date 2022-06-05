@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {Popover} from "antd";
 import PropTypes from "prop-types";
-import MyArticle from "../../MyArticle";
-import '../index.less';
+import MyArticle from "../MyArticle";
+import '../../index.less';
 
 
 class PopoverComponent extends Component {

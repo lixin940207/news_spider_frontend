@@ -2,17 +2,19 @@ import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
 import PropTypes from "prop-types";
 import '../index.less'
-import ImageComponent from "../ImageComponent";
-import FooterComponent from "../FooterComponent";
-import HeadlineComponent from "../HeadlineComponent";
-import PopoverComponent from "../PopoverComponent";
-import TimelineComponent from "../TimelineComponent";
+import ImageComponent from "../assemblies/ImageComponent";
+import FooterComponent from "../assemblies/FooterComponent";
+import HeadlineComponent from "../assemblies/HeadlineComponent";
+import PopoverComponent from "../assemblies/PopoverComponent";
+import TimelineComponent from "../assemblies/TimelineComponent";
+import ExpandMoreComponent from "../assemblies/ExpandMoreComponent";
 
 
 class CardWithImageAndLive extends Component {
     static propTypes = {
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
+        handleExpand: PropTypes.func,
     }
 
     static defaultProps = {
@@ -33,10 +35,11 @@ class CardWithImageAndLive extends Component {
                         </div>
                     </PopoverComponent>
                 </ProCard>
-                <ProCard style={{marginLeft: "-15px", overflowY: "scroll", height: '263px', width: 'auto'}}>
-                    <div style={{marginLeft: "-10px", marginRight: "-10px", height: "180px"}}>
-                        <TimelineComponent news={this.props.news}/>
+                <ProCard style={{marginLeft: "-15px", height: '263px', width: 'auto'}}>
+                    <div style={{marginLeft: "-10px", marginRight: "-10px", height: "210px", overflow: "hidden"}}>
+                        <TimelineComponent news={this.props.news} lang={this.props.lang}/>
                     </div>
+                    <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
                 </ProCard>
             </ProCard>
         )

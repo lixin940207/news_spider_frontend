@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Typography} from "antd";
 import PropTypes from "prop-types";
-import '../index.less';
+import '../../index.less';
 import Text from "antd/es/typography/Text";
 
 const {Paragraph} = Typography;

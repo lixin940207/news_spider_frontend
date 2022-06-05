@@ -2,20 +2,29 @@ import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
 import PropTypes from "prop-types";
 import '../index.less';
-import FooterComponent from "../FooterComponent";
-import ImageComponent from "../ImageComponent";
-import HeadlineComponent from "../HeadlineComponent";
-import PopoverComponent from "../PopoverComponent";
+import FooterComponent from "../assemblies/FooterComponent";
+import ImageComponent from "../assemblies/ImageComponent";
+import HeadlineComponent from "../assemblies/HeadlineComponent";
+import PopoverComponent from "../assemblies/PopoverComponent";
+import ExpandMoreComponent from "../assemblies/ExpandMoreComponent";
 
 class CardWithImage extends Component {
+    state={
+        expanded: false,
+    }
     static propTypes = {
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
+        handleExpand: PropTypes.func,
     }
 
     static defaultProps = {
         lang: 'ori',
     }
+
+    // handleExpand = ()=>{
+    //     this.setState({expanded: !this.state.expanded})
+    // }
 
     render() {
         return (
@@ -27,6 +36,7 @@ class CardWithImage extends Component {
                         <HeadlineComponent news={this.props.news} lineNumber={3} lang={this.props.lang}/>
                         </div>
                         <FooterComponent news={this.props.news}/>
+                        <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
                     </div>
                 </PopoverComponent>
             </ProCard>

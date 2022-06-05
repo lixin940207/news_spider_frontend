@@ -3,9 +3,10 @@ import ProCard from "@ant-design/pro-card";
 import {Typography} from "antd";
 import PropTypes from "prop-types";
 import '../index.less'
-import FooterComponent from "../FooterComponent";
-import HeadlineComponent from "../HeadlineComponent";
-import PopoverComponent from "../PopoverComponent";
+import FooterComponent from "../assemblies/FooterComponent";
+import HeadlineComponent from "../assemblies/HeadlineComponent";
+import PopoverComponent from "../assemblies/PopoverComponent";
+import ExpandMoreComponent from "../assemblies/ExpandMoreComponent";
 
 const {Paragraph} = Typography;
 
@@ -13,6 +14,7 @@ class CardWithTitleIntro extends Component {
     static propTypes = {
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
+        handleExpand: PropTypes.func,
     }
 
     static defaultProps = {
@@ -34,6 +36,7 @@ class CardWithTitleIntro extends Component {
                             </Paragraph>
                         </div>
                         <FooterComponent news={this.props.news}/>
+                        <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
                     </div>
                 </PopoverComponent>
             </ProCard>

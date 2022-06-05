@@ -1,32 +1,27 @@
 import React, {Component} from 'react';
 import {PageHeader, Tabs, Button, Tag, Tooltip} from 'antd';
 import {MailOutlined, SearchOutlined, TranslationOutlined} from '@ant-design/icons';
-import {createFromIconfontCN} from '@ant-design/icons';
-
 import Text from "antd/es/typography/Text";
 import FranceNewsApp from "../news/france_news";
 import WorldNewsApp from "../news/world_news";
 import ChinaNewsApp from "../news/china_news";
+import MyIcon from "../MyIcon";
+import TestApp from "../news/test";
 
 const {TabPane} = Tabs;
-
-
-const MyIcon = createFromIconfontCN({
-    scriptUrl: '//at.alicdn.com/t/font_2669396_txkzoe6qup8.js',
-});
-
 
 class MainComponent extends Component {
 
     state = {
         lang: 'ori',
+        langButtonType: "default",
     }
 
     handleOnClick = ()=>{
         if(this.state.lang === 'ori'){
-            this.setState({lang: 'cn'})
+            this.setState({lang: 'cn', langButtonType: "primary"});
         }else{
-            this.setState({lang: 'ori'})
+            this.setState({lang: 'ori', langButtonType: "default"});
         }
     }
 
@@ -38,25 +33,27 @@ class MainComponent extends Component {
                 subTitle="This is a subtitle"
                 extra={[
                     <Tooltip title="search">
-                        <Button type="primary" shape="circle" icon={<SearchOutlined/>}/>
+                        <Button key="button1" type="primary" shape="circle" icon={<SearchOutlined/>}/>
                     </Tooltip>,
-                    <Button key="1" shape="circle" icon={<TranslationOutlined/>} onClick={this.handleOnClick}/>,
-                    <Button key="2" shape="circle" icon={<MailOutlined/>}/>,
+                    <Button key="button2" type={this.state.langButtonType} shape="circle" icon={<TranslationOutlined/>} onClick={this.handleOnClick}/>,
+                    <Button key="button3" shape="circle" icon={<MailOutlined/>}/>,
                 ]}
                 footer={
                     <Tabs defaultActiveKey="1">
-                        <TabPane tab={<span> <MyIcon type="icon-lixinfrance"/>France</span>} key="1">
+                        <TabPane style={{backgroundColor: "#F4F4F4"}} tab={<span> <MyIcon type="icon-lixinfrance"/>France</span>} key="tab1">
                             <FranceNewsApp lang={this.state.lang}/>
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixinchina"/>China</span>} key="2">
+                        <TabPane tab={<span> <MyIcon type="icon-lixinchina"/>China</span>} key="tab2">
                             <ChinaNewsApp lang={this.state.lang}/>
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixina-shijie1"/>World</span>} key="3">
+                        <TabPane tab={<span> <MyIcon type="icon-lixina-shijie1"/>World</span>} key="tab3">
                             <WorldNewsApp lang={this.state.lang}/>
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixina-bingdu1"/>Covid</span>} key="4">
+                        <TabPane tab={<span> <MyIcon type="icon-lixina-bingdu1"/>Covid</span>} key="tab4">
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Social Media</span>} key="5"/>
+                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Social Media</span>} key="tab5">
+                            <TestApp/>
+                        </TabPane>
 
                     </Tabs>
                 }

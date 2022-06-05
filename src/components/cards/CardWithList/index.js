@@ -1,15 +1,17 @@
 import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
 import PropTypes from "prop-types";
-import FooterComponent from "../FooterComponent";
-import HeadlineComponent from "../HeadlineComponent";
-import SubtitleComponent from "../SubtitlelistComponent";
+import FooterComponent from "../assemblies/FooterComponent";
+import HeadlineComponent from "../assemblies/HeadlineComponent";
+import SubtitleComponent from "../assemblies/SubtitlelistComponent";
+import ExpandMoreComponent from "../assemblies/ExpandMoreComponent";
 
 
 class CardWithList extends Component {
     static propTypes = {
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
+        handleExpand: PropTypes.func,
     }
 
     static defaultProps = {
@@ -23,6 +25,8 @@ class CardWithList extends Component {
                     {this.props.news.title ? <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/> :'' }
                     <SubtitleComponent news={this.props.news} lang={this.props.lang}/>
                     <FooterComponent news={this.props.news}/>
+                    <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
+
                 </div>
             </ProCard>
         )

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Image} from "antd";
 import PropTypes from "prop-types";
-import '../index.less';
+import '../../index.less';
 
 
 class ImageComponent extends Component {

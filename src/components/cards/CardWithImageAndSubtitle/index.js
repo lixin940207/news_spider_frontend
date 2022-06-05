@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import ProCard from "@ant-design/pro-card";
 import PropTypes from "prop-types";
 import '../index.less'
-import FooterComponent from "../FooterComponent";
-import ImageComponent from "../ImageComponent";
-import HeadlineComponent from "../HeadlineComponent";
-import SubtitleComponent from "../SubtitlelistComponent";
-import PopoverComponent from "../PopoverComponent";
+import FooterComponent from "../assemblies/FooterComponent";
+import ImageComponent from "../assemblies/ImageComponent";
+import HeadlineComponent from "../assemblies/HeadlineComponent";
+import SubtitleComponent from "../assemblies/SubtitlelistComponent";
+import PopoverComponent from "../assemblies/PopoverComponent";
+import ExpandMoreComponent from "../assemblies/ExpandMoreComponent";
 
 
 class CardWithImageAndSubtitle extends Component {
@@ -14,6 +15,7 @@ class CardWithImageAndSubtitle extends Component {
     static propTypes ={
         news: PropTypes.object.isRequired,
         lang: PropTypes.string,
+        handleExpand: PropTypes.func,
     }
 
     static defaultProps = {
@@ -36,6 +38,7 @@ class CardWithImageAndSubtitle extends Component {
                 </ProCard>
                 <ProCard style={{marginLeft: "-25px", width: "auto", height:"263px"}}>
                     <SubtitleComponent news={this.props.news} lang={this.props.lang}/>
+                    <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
                 </ProCard>
             </ProCard>
         )
