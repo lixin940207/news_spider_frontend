@@ -10,5 +10,6 @@ module.exports = {
         'LeMondeAPI': `http://${news_spider_api_host}:${news_spider_api_port}/lemonde`,
         'NYTimesAPI': `http://${news_spider_api_host}:${news_spider_api_port}/nytimes`,
         'LeFigaroAPI': `http://${news_spider_api_host}:${news_spider_api_port}/lefigaro`,
+        'TechNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_tech_news`
     }
 }

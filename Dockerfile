@@ -1,5 +1,5 @@
 FROM node:16.13.2-slim
-ENV NODE_ENV=production
+ENV NODE_ENV=development
 
 ARG Version=1.0.0
 
@@ -23,8 +23,10 @@ RUN apt-get update \
 
 COPY --chown=node:node . .
 
+RUN yarn build
+
 USER node
 
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

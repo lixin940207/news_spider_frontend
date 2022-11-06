@@ -33,15 +33,17 @@ class SubtitleComponent extends Component {
                     this.props.news.relatedNewsList.slice(0,3).map((news, idx) => {
                         return (
                             <li key={idx}>
-                                {/*<PopoverComponent article={news.article} lang={this.props.lang}>*/}
+                                <PopoverComponent article={news.article} lang={this.props.lang}>
                                     <Paragraph className="subtitle"
                                                ellipsis={this.state.elipsisStyle}>
+                                        {/*<b>*/}
                                         {this.props.lang === 'ori' ?
                                             news.title.ori :
                                             (news.title.cn ? news.title.cn : news.title.ori)
                                         }
+                                        {/*</b>*/}
                                     </Paragraph>
-                                {/*</PopoverComponent>*/}
+                                </PopoverComponent>
                             </li>
                         )
                     })

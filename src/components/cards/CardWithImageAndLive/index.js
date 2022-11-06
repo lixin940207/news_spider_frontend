@@ -35,7 +35,7 @@ class CardWithImageAndLive extends Component {
                         </div>
                     </PopoverComponent>
                 </ProCard>
-                <ProCard style={{marginLeft: "-15px", height: '263px', width: 'auto'}}>
+                <ProCard style={{marginLeft: "-20px", height: '263px', width: 'auto'}}>
                     <div style={{marginLeft: "-10px", marginRight: "-10px", height: "210px", overflow: "hidden"}}>
                         <TimelineComponent news={this.props.news} lang={this.props.lang}/>
                     </div>

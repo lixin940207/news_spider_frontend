@@ -46,7 +46,7 @@ class MyArticle extends Component {
 
     render() {
         return (
-            <div style={{marginRight: "30px", marginBottom: "20px"}}>
+            <div style={{marginRight: "20px", marginBottom: "20px"}}>
                 <div>
                     {
                         !this.props.isLive && this.props.showSummary && this.props.article.summary ?
