@@ -30,8 +30,9 @@ class MainComponent extends Component {
         return (
             <PageHeader
                 className="site-page-header-responsive"
-                title="新闻集成器"
-                subTitle="This is a subtitle"
+                title="Bread News"
+                subTitle="All you are interested in"
+                avatar={{src: process.env.PUBLIC_URL + 'Illustration_sans_titre.png', size: 100}}
                 extra={[
                     <Tooltip title="search">
                         <Button key="button1" type="primary" shape="circle" icon={<SearchOutlined/>}/>

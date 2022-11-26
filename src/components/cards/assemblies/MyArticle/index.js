@@ -21,7 +21,7 @@ class MyArticle extends Component {
         lang: PropTypes.string
     }
     static defaultProps = {
-        showSummary: true,
+        showSummary: false,
         isLive: false,
         lang: "ori",
     }
@@ -47,26 +47,19 @@ class MyArticle extends Component {
     render() {
         return (
             <div style={{marginRight: "20px", marginBottom: "20px"}}>
-                {
-                    !this.props.isLive && this.props.article.headImageHref ?
-                    <img alt="illustration" src={this.props.article.headImageHref} style={{marginBottom: "20px"}}/>
-                    :
-                    ""
-                }
-                <Paragraph>
                 <div>
                     {
-                        !this.props.isLive && this.props.showSummary && this.props.article.summary ?
+                        !this.props.isLive && this.props.showSummary
+                        && this.props.article && this.props.article.summary ?
                             this.props.lang === 'ori' ?
                                 this.props.article.summary.ori
                                 : (this.props.article.summary.cn ? this.props.article.summary.cn : this.props.article.summary.ori)
                             : ""
                     }
                 </div>
-                </Paragraph>
                 <div>
                     {
-                        !this.props.isLive ?
+                        !this.props.isLive && this.props.article?
                             this.props.article.bodyBlockList.map(item => {
                                 if (item.type === 'p') {
                                     return (<Paragraph>
@@ -78,7 +71,7 @@ class MyArticle extends Component {
                                         }
                                     </Paragraph>)
                                 } else if (item.type === 'img') {
-                                    return (<img alt="illustration" src={item.src}/>)
+                                    return (<img alt="illustration" src={item.src} style={{width: 200, height:150}}/>)
                                 } else if (item.type === 'ul') {
                                     return (<ul>
                                         {

@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ProCard from '@ant-design/pro-card';
 import '../../index.less';
-import {Button} from "antd";
 import CardExpanded from "../cards/CardExpanded";
 
 
