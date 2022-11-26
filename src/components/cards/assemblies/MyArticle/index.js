@@ -21,7 +21,7 @@ class MyArticle extends Component {
         lang: PropTypes.string
     }
     static defaultProps = {
-        showSummary: false,
+        showSummary: true,
         isLive: false,
         lang: "ori",
     }
@@ -47,6 +47,13 @@ class MyArticle extends Component {
     render() {
         return (
             <div style={{marginRight: "20px", marginBottom: "20px"}}>
+                {
+                    !this.props.isLive && this.props.article.headImageHref ?
+                    <img alt="illustration" src={this.props.article.headImageHref} style={{marginBottom: "20px"}}/>
+                    :
+                    ""
+                }
+                <Paragraph>
                 <div>
                     {
                         !this.props.isLive && this.props.showSummary && this.props.article.summary ?
@@ -56,6 +63,7 @@ class MyArticle extends Component {
                             : ""
                     }
                 </div>
+                </Paragraph>
                 <div>
                     {
                         !this.props.isLive ?

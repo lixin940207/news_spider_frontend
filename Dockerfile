@@ -1,10 +1,7 @@
 FROM node:16.13.2-slim
-ENV NODE_ENV=development
-
-ARG Version=1.0.0
+ENV ENV=PRODUCTION
 
 LABEL name="news_spider_frontend"
-LABEL version=$Version
 
 RUN mkdir /news_spider_frontend
 COPY ./package.json /news_spider_frontend/
@@ -21,11 +18,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-COPY --chown=node:node . .
+COPY . .
 
-RUN yarn build
+RUN chown -Rh $user:$user /news_spider_frontend
 
-USER node
+USER $user
 
 EXPOSE 3000
 

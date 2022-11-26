@@ -1,5 +1,5 @@
-const news_spider_api_host = process.env.NEWS_SPIDER_API_HOST || "127.0.0.1";
-const news_spider_api_port = process.env.NEWS_SPIDER_API_PORT || 5000;
+const news_spider_api_host = process.env.REACT_APP_NEWS_SPIDER_API_HOST || "127.0.0.1";
+const news_spider_api_port = process.env.REACT_APP_NEWS_SPIDER_API_PORT || 5000;
 
 module.exports = {
     APIs: {
