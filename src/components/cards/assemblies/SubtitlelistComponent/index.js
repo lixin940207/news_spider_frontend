@@ -12,12 +12,7 @@ class SubtitleComponent extends Component {
     }
 
     static propTypes = {
-        news: PropTypes.object.isRequired,
-        lang: PropTypes.string,
-    }
-
-    static defaultProps = {
-        lang: 'ori',
+        news: PropTypes.object.isRequired, lang: PropTypes.string,
     }
 
     componentDidMount() {
@@ -27,29 +22,18 @@ class SubtitleComponent extends Component {
     }
 
     render() {
-        return (
-            <ul style={{marginLeft: "-20px"}}>
-                {
-                    this.props.news.relatedNewsList.slice(0,3).map((news, idx) => {
-                        return (
-                            <li key={idx}>
-                                <PopoverComponent article={news.article} lang={this.props.lang}>
-                                    <Paragraph className="subtitle"
-                                               ellipsis={this.state.elipsisStyle}>
-                                        {/*<b>*/}
-                                        {this.props.lang === 'ori' ?
-                                            news.title.ori :
-                                            (news.title.cn ? news.title.cn : news.title.ori)
-                                        }
-                                        {/*</b>*/}
-                                    </Paragraph>
-                                </PopoverComponent>
-                            </li>
-                        )
-                    })
-                }
-            </ul>
-        )
+        return (<ul style={{marginLeft: "-20px"}}>
+            {this.props.news.relatedNewsList.slice(0, 3).map((news, idx) => {
+                return (<li key={idx}>
+                    <PopoverComponent article={news.article} lang={this.props.lang}>
+                        <Paragraph className="subtitle"
+                                   ellipsis={this.state.elipsisStyle}>
+                            {news.title[this.props.lang]}
+                        </Paragraph>
+                    </PopoverComponent>
+                </li>)
+            })}
+        </ul>)
     }
 }
 

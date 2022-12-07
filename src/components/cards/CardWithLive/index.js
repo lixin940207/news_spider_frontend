@@ -14,16 +14,13 @@ class CardWithLive extends Component {
         handleExpand: PropTypes.func,
     }
 
-    static defaultProps = {
-        lang: 'ori',
-    }
-
     render() {
         return (
-            <ProCard bordered className="cardStyle" style={{overflowY: "hidden", overflowX: 'hidden', position: "relative"}}>
-                <div style={{marginTop: "-5px", marginLeft:"-5px", marginRight:"-5px"}}>
+            <ProCard bordered className="cardStyle"
+                     style={{overflowY: "hidden", overflowX: 'hidden', position: "relative"}}>
+                <div style={{marginTop: "-5px", marginLeft: "-5px", marginRight: "-5px"}}>
                     <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/>
-                    <div style={{marginTop: "10px", marginRight:"-19px", height: "150px", overflow:'hidden'}}>
+                    <div style={{marginTop: "10px", marginRight: "-19px", height: "150px", overflow: 'hidden'}}>
                         <TimelineComponent news={this.props.news} lang={this.props.lang}/>
                     </div>
                     <FooterComponent news={this.props.news}/>

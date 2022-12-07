@@ -15,7 +15,6 @@ class HeadlineComponent extends Component {
 
     static defaultProps = {
         lineNumber: 3,
-        lang: 'ori',
     }
 
     render() {
@@ -24,9 +23,7 @@ class HeadlineComponent extends Component {
                        ellipsis={{rows: this.props.lineNumber, expandable: false, symbol: '...'}}>
                 <b>
                     {this.props.news.isLive ? <Text style={{color: "blue"}}>LIVE </Text> : ''}
-                    {this.props.lang === 'ori'?
-                        this.props.news.title.ori:
-                        (this.props.news.title.cn?this.props.news.title.cn:this.props.news.title.ori)}
+                    {this.props.news.title[this.props.lang]}
                 </b>
             </Paragraph>
         )

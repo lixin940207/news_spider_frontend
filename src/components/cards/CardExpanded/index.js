@@ -11,8 +11,8 @@ const {Paragraph, Title} = Typography;
 
 class CardExpanded extends Component {
     state = {
-        imageHref : "",
-        summary: {ori: "", cn: ""},
+        imageHref: "",
+        summary: {en: "", zh: "", fr: ""},
     }
 
     static propTypes = {
@@ -22,21 +22,21 @@ class CardExpanded extends Component {
     }
 
     componentDidMount() {
-        if (this.props.news.imageHref === undefined && this.props.news.article !== undefined ){
-            if(this.props.news.article.headImageHref === undefined){
-                const illustrations = this.props.news.article.bodyBlockList.filter(i=>i.type==='img');
-                if (illustrations.length > 0){
+        if (this.props.news.imageHref === undefined && this.props.news.article !== undefined) {
+            if (this.props.news.article.headImageHref === undefined) {
+                const illustrations = this.props.news.article.bodyBlockList.filter(i => i.type === 'img');
+                if (illustrations.length > 0) {
                     this.setState({imageHref: illustrations[0].src})
                 }
-            } else{
+            } else {
                 this.setState({imageHref: this.props.news.article.headImageHref})
             }
-        }else{
+        } else {
             this.setState({imageHref: this.props.news.imageHref})
         }
-        if(!this.props.news.isLive && this.props.news.summary.ori === undefined){
+        if (!this.props.news.isLive && this.props.news.summary.en === undefined) {
             this.setState({summary: this.props.news.article.summary})
-        }else{
+        } else {
             this.setState({summary: this.props.news.summary})
         }
     }
@@ -49,28 +49,24 @@ class CardExpanded extends Component {
                            preview={false}
                            src={this.state.imageHref}/>
                     <Title level={4} style={{width: "275px"}}>
-                        {this.props.lang === 'ori'?
-                            this.props.news.title.ori
-                            :
-                            this.props.news.title.cn? this.props.news.title.cn: this.props.news.title.ori
+                        {
+                            this.props.news.title[this.props.lang]
                         }
                     </Title>
                     <Paragraph style={{width: "275px"}}>
                         {
-                            this.state.summary !== undefined?
-                                this.props.lang === 'ori'?
-                                    this.state.summary.ori
-                                    :
-                                    this.state.summary.cn? this.state.summary.cn: this.state.summary.ori
+                            this.state.summary !== undefined ?
+                                this.state.summary[this.props.lang]
                                 :
                                 ""
                         }
                     </Paragraph>
                 </ProCard>
                 <ProCard style={{marginLeft: "-30px", width: "auto", height: "542px"}}>
-                    <div style={{height:"480px", overflowY:"scroll", marginRight: "-25px"}}>
-                        {this.props.news.isLive?
-                            <MyArticle isLive={true} showSummary={true} liveList={this.props.news.liveNewsList} lang={this.props.lang}/>
+                    <div style={{height: "480px", overflowY: "scroll", marginRight: "-25px"}}>
+                        {this.props.news.isLive ?
+                            <MyArticle isLive={true} showSummary={true} liveList={this.props.news.liveNewsList}
+                                       lang={this.props.lang}/>
                             :
                             <MyArticle isLive={false} article={this.props.news.article} lang={this.props.lang}/>
                         }

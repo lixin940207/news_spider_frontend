@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {PageHeader, Tabs, Button, Tag, Tooltip} from 'antd';
+import {PageHeader, Tabs, Button, Tag, Tooltip, Dropdown} from 'antd';
 import {MailOutlined, SearchOutlined, TranslationOutlined} from '@ant-design/icons';
 import Text from "antd/es/typography/Text";
 import FranceNewsApp from "../news/france_news";
@@ -14,19 +14,50 @@ const {TabPane} = Tabs;
 class MainComponent extends Component {
 
     state = {
-        lang: 'ori',
+        lang: undefined,
         langButtonType: "default",
     }
 
-    handleOnClick = ()=>{
-        if(this.state.lang === 'ori'){
-            this.setState({lang: 'cn', langButtonType: "primary"});
-        }else{
-            this.setState({lang: 'ori', langButtonType: "default"});
-        }
+    handleOnClick = (lang) => {
+        this.setState({lang, langButtonType: "primary"});
     }
 
     render() {
+        const items = [
+            {
+                key: 'fr',
+                label: (
+                    <button onClick={() => this.handleOnClick('fr')}>
+                        French
+                    </button>
+                ),
+            },
+            {
+                key: 'en',
+                label: (
+                    <button onClick={() => this.handleOnClick('en')}>
+                        English
+                    </button>
+                ),
+            },
+            {
+                key: 'zh',
+                label: (
+                    <button onClick={() => this.handleOnClick('zh')}>
+                        Chinese
+                    </button>
+                ),
+            },
+            {
+                key: 'default',
+                label: (
+                    <button onClick={() => this.handleOnClick(undefined)}>
+                        default
+                    </button>
+                ),
+            },
+        ];
+        // const lang_attribute = { lang: this.state.lang }
         return (
             <PageHeader
                 className="site-page-header-responsive"
@@ -37,12 +68,19 @@ class MainComponent extends Component {
                     <Tooltip title="search">
                         <Button key="button1" type="primary" shape="circle" icon={<SearchOutlined/>}/>
                     </Tooltip>,
-                    <Button key="button2" type={this.state.langButtonType} shape="circle" icon={<TranslationOutlined/>} onClick={this.handleOnClick}/>,
+                    <Dropdown menu={{
+                        items,
+                    }} placement="bottom">
+                        <Button key="button2" type={this.state.langButtonType} shape="circle"
+                                icon={<TranslationOutlined/>}/>
+                    </Dropdown>
+                    ,
                     <Button key="button3" shape="circle" icon={<MailOutlined/>}/>,
                 ]}
                 footer={
                     <Tabs defaultActiveKey="1">
-                        <TabPane style={{backgroundColor: "#F4F4F4"}} tab={<span> <MyIcon type="icon-lixinfrance"/>France</span>} key="tab1">
+                        <TabPane style={{backgroundColor: "#F4F4F4"}}
+                                 tab={<span> <MyIcon type="icon-lixinfrance"/>France</span>} key="tab1">
                             <FranceNewsApp lang={this.state.lang}/>
                         </TabPane>
                         <TabPane tab={<span> <MyIcon type="icon-lixinchina"/>China</span>} key="tab2">

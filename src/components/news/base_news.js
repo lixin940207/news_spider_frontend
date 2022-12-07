@@ -37,15 +37,15 @@ class BaseNewsApp extends Component {
         });
     }
 
-    revert = (newsList)=>{
+    revert = (newsList) => {
         return newsList.flatMap(news => {
             if (news.ifArray) {
                 return news.data
-                    .filter(i=>i.platform!=="example")
-                    .flatMap(item=> {
-                        if (item.ifArray){
-                            return item.data.filter(i=>i.platform!=="example").map(i=>i);
-                        }else{
+                    .filter(i => i.platform !== "example")
+                    .flatMap(item => {
+                        if (item.ifArray) {
+                            return item.data.filter(i => i.platform !== "example").map(i => i);
+                        } else {
                             return item;
                         }
                     });
@@ -119,7 +119,7 @@ class BaseNewsApp extends Component {
                     }
                     return i;
                 })
-                newsList.sort((a, b) => a.publishTime > b.publishTime? -1: 1)
+                newsList.sort((a, b) => a.publishTime > b.publishTime ? -1 : 1)
                 const {newNewsList} = this.postProcessNews(newsList);
                 this.setState({newsList: newNewsList});
             }
@@ -240,7 +240,7 @@ class BaseNewsApp extends Component {
                         sideColNews.push(oriNewsList[j]);
                         visited[j] = true;
                         colTemp += 2;
-                    }else if (!visited[j] && this.smallCardList.includes(oriNewsList[j].newsType)){
+                    } else if (!visited[j] && this.smallCardList.includes(oriNewsList[j].newsType)) {
                         sideColNews.push(oriNewsList[j]);
                         visited[j] = true;
                         colTemp += 1;
@@ -255,7 +255,7 @@ class BaseNewsApp extends Component {
                         newNewsList.push({ifArray: true, data: sideColNews, row, col: 0});
                         newNewsList.push({...expandNews, row, col: 1});
                     }
-                }else{
+                } else {
                     newNewsList.push({...expandNews, row, col: 0});
                 }
                 row += 1;
@@ -265,11 +265,15 @@ class BaseNewsApp extends Component {
 
             if (curr_news.newsType === "CardWithTitleWide") {
                 if (i + 1 < oriNewsList.length && oriNewsList[i + 1].newsType === "CardWithTitleWide") {
-                    curr_news = {ifArray: true, newsType: "CardWithTitleWide", data: [oriNewsList[i], oriNewsList[i + 1]]};
+                    curr_news = {
+                        ifArray: true,
+                        newsType: "CardWithTitleWide",
+                        data: [oriNewsList[i], oriNewsList[i + 1]]
+                    };
                     visited[i + 1] = true;
                 } else {
                     const template = {
-                        title: {ori:"example"},
+                        title: {en: "example", fr: "example", zh: "example"},
                         platform: "example",
                         _id: Math.random(),
                         newsType: "CardWithTitleWide",
@@ -286,14 +290,24 @@ class BaseNewsApp extends Component {
             }
             if (col + width === 4) {
                 if (curr_news.ifArray)
-                    curr_news = {...curr_news, data: curr_news.data.map(i =>{return {...i, col, row}})}
+                    curr_news = {
+                        // eslint-disable-next-line no-loop-func
+                        ...curr_news, data: curr_news.data.map(i => {
+                            return {...i, col, row}
+                        })
+                    }
                 newNewsList.push({...curr_news, row, col});
                 visited[i] = true;
                 row += 1;
                 col = 0;
             } else if (col + width < 4) {
                 if (curr_news.ifArray)
-                    curr_news = {...curr_news, data: curr_news.data.map(i =>{return {...i, col, row}})}
+                    curr_news = {
+                        // eslint-disable-next-line no-loop-func
+                        ...curr_news, data: curr_news.data.map(i => {
+                            return {...i, col, row}
+                        })
+                    }
                 newNewsList.push({...curr_news, row, col});
                 col = col + width;
                 visited[i] = true;
@@ -301,23 +315,36 @@ class BaseNewsApp extends Component {
                 let j = i + 1
                 while (j < oriNewsList.length) {
                     if (!(this.wideCardList.includes(oriNewsList[j].newsType))) {
-                        if (oriNewsList[j].ifArray === undefined && this.smallCardList.includes(oriNewsList[j].newsType)){
+                        if (oriNewsList[j].ifArray === undefined && this.smallCardList.includes(oriNewsList[j].newsType)) {
                             if (j + 1 < oriNewsList.length && oriNewsList[j + 1].newsType === "CardWithTitleWide") {
-                                oriNewsList[j] = {ifArray: true, newsType: "CardWithTitleWide", data: [oriNewsList[j], oriNewsList[j + 1]]};
+                                oriNewsList[j] = {
+                                    ifArray: true,
+                                    newsType: "CardWithTitleWide",
+                                    data: [oriNewsList[j], oriNewsList[j + 1]]
+                                };
                                 visited[j + 1] = true;
                             } else {
                                 const template = {
-                                    title: {ori:"example"},
+                                    title: {en: "example", fr: "example", zh: "example"},
                                     platform: "example",
                                     _id: Math.random(),
                                     newsType: "CardWithTitleWide",
                                     publishTime: oriNewsList[i].publishTime,
                                 }
-                                oriNewsList[j] = {ifArray: true, newsType: "CardWithTitleWide", data: [oriNewsList[j], template]};
+                                oriNewsList[j] = {
+                                    ifArray: true,
+                                    newsType: "CardWithTitleWide",
+                                    data: [oriNewsList[j], template]
+                                };
                             }
                         }
                         if (oriNewsList[j].ifArray)
-                            oriNewsList[j] = {...oriNewsList[j], data: oriNewsList[j].data.map(i =>{return {...i, col, row}})}
+                            oriNewsList[j] = {
+                                // eslint-disable-next-line no-loop-func
+                                ...oriNewsList[j], data: oriNewsList[j].data.map(i => {
+                                    return {...i, col, row}
+                                })
+                            }
                         newNewsList.push({...oriNewsList[j], row, col});
                         visited[j] = true;
                         row += 1;
@@ -370,31 +397,32 @@ class BaseNewsApp extends Component {
                     {
                         this.state.newsList.map((news) => {
                             if (news.ifArray) {
-                                const gutter = (news.data[0]!==undefined && news.data[0].newsType === 'CardWithTitleWide') ? [0, 8] : [0, 16];
+                                const gutter = (news.data[0] !== undefined && news.data[0].newsType === 'CardWithTitleWide') ? [0, 8] : [0, 16];
                                 return (
                                     <ProCard colSpan={6} ghost gutter={gutter} direction="column">
                                         {
                                             news.data.map(item => {
                                                 const Component = React.lazy(() => import('../cards/' + item.newsType));
-                                                if (item.ifArray){
+                                                if (item.ifArray) {
                                                     return (
-                                                        <ProCard colSpan={6} ghost gutter={[0,8]} direction="column">
-                                                        {
-                                                            item.data.map(i=>{
-                                                                return (
-                                                                    <ProCard ghost key={i._id}>
-                                                                        <React.Suspense fallback={<div>loading...</div>}>
-                                                                            <Component news={i}
-                                                                                       lang={this.props.lang}
-                                                                                       handleExpand={this.updateNewsList(i)}
-                                                                                       handleFold={this.updateNewsList(i, false)}/>
-                                                                        </React.Suspense>
-                                                                    </ProCard>
-                                                                )
-                                                            })}
+                                                        <ProCard colSpan={6} ghost gutter={[0, 8]} direction="column">
+                                                            {
+                                                                item.data.map(i => {
+                                                                    return (
+                                                                        <ProCard ghost key={i._id}>
+                                                                            <React.Suspense
+                                                                                fallback={<div>loading...</div>}>
+                                                                                <Component news={i}
+                                                                                           lang={this.props.lang}
+                                                                                           handleExpand={this.updateNewsList(i)}
+                                                                                           handleFold={this.updateNewsList(i, false)}/>
+                                                                            </React.Suspense>
+                                                                        </ProCard>
+                                                                    )
+                                                                })}
                                                         </ProCard>
                                                     )
-                                                }else{
+                                                } else {
                                                     return (
                                                         <ProCard ghost key={item._id}>
                                                             <React.Suspense fallback={<div>loading...</div>}>

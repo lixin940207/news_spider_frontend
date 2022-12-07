@@ -11,10 +11,6 @@ class TimelineComponent extends Component {
         lang: PropTypes.string,
     }
 
-    static defaultProps = {
-        lang: 'ori',
-    }
-
     render() {
         return (
             <Timeline>
@@ -26,9 +22,9 @@ class TimelineComponent extends Component {
                                     {live.liveTime !== undefined ?
                                         new Date(live.liveTime).getHours() + 'h' + new Date(live.liveTime).getMinutes() + '  '
                                         : ''}
-                                    {this.props.lang === 'ori'?
-                                        live.liveTitle.ori
-                                        : (live.liveTitle.cn?live.liveTitle.cn:live.liveTitle.ori)}
+                                    {
+                                        live.liveTitle[this.props.lang]
+                                    }
                                 </div>
                             </PopoverComponent>
                         </Timeline.Item>

@@ -1,4 +1,3 @@
-import React from 'react';
 import '../../index.less';
 import BaseNewsApp from "./base_news";
 import axios from "axios";
@@ -12,7 +11,7 @@ class TechNewsApp extends BaseNewsApp {
     }
 
     static defaultProps = {
-        lang: 'ori',
+        lang: 'en',
     }
 
     fetchData = (offset, limit, callback) => {

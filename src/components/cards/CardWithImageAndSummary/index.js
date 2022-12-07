@@ -19,10 +19,6 @@ class CardWithImageAndSubtitle extends Component {
         handleExpand: PropTypes.func,
     }
 
-    static defaultProps = {
-        lang: 'ori',
-    }
-
     render() {
         return (
             <ProCard className="wideCardStyle" ghost bordered layout="center" direction="row">
@@ -31,7 +27,7 @@ class CardWithImageAndSubtitle extends Component {
                         <div style={{margin: "-5px"}}>
                             <ImageComponent news={this.props.news}/>
                             <div style={{marginTop: "5px"}}>
-                            <HeadlineComponent news={this.props.news} lineNumber={3} lang={this.props.lang}/>
+                                <HeadlineComponent news={this.props.news} lineNumber={3} lang={this.props.lang}/>
                             </div>
                             <FooterComponent news={this.props.news}/>
                         </div>
@@ -41,9 +37,9 @@ class CardWithImageAndSubtitle extends Component {
                          direction="column"
                          style={{marginLeft: "-20px", width: "auto", height: "262px"}}>
                     <Paragraph className="subtitle" style={{fontSize: "13px"}}>
-                        {this.props.lang==='ori'?
-                            this.props.news.summary.ori:
-                            (this.props.news.summary.cn?this.props.news.summary.cn:this.props.news.summary.ori)}
+                        {
+                            this.props.news.summary[this.props.lang]
+                        }
                     </Paragraph>
                     <ExpandMoreComponent handleExpand={this.props.handleExpand}/>
                 </ProCard>

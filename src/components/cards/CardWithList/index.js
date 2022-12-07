@@ -14,15 +14,12 @@ class CardWithList extends Component {
         handleExpand: PropTypes.func,
     }
 
-    static defaultProps = {
-        lang: 'ori',
-    }
-
     render() {
         return (
             <ProCard bordered className="cardStyle">
                 <div style={{margin: "-5px", marginTop: "-10px"}}>
-                    {this.props.news.title ? <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/> :'' }
+                    {this.props.news.title ?
+                        <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/> : ''}
                     <SubtitleComponent news={this.props.news} lang={this.props.lang}/>
                     <FooterComponent news={this.props.news}/>
                     <ExpandMoreComponent handleExpand={this.props.handleExpand}/>

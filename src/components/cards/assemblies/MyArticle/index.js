@@ -23,7 +23,6 @@ class MyArticle extends Component {
     static defaultProps = {
         showSummary: false,
         isLive: false,
-        lang: "ori",
     }
 
     componentWillMount() {
@@ -51,57 +50,39 @@ class MyArticle extends Component {
                     {
                         !this.props.isLive && this.props.showSummary
                         && this.props.article && this.props.article.summary ?
-                            this.props.lang === 'ori' ?
-                                this.props.article.summary.ori
-                                : (this.props.article.summary.cn ? this.props.article.summary.cn : this.props.article.summary.ori)
+                            this.props.article.summary[this.props.lang]
                             : ""
                     }
                 </div>
                 <div>
                     {
-                        !this.props.isLive && this.props.article?
+                        !this.props.isLive && this.props.article ?
                             this.props.article.bodyBlockList.map(item => {
                                 if (item.type === 'p') {
                                     return (<Paragraph>
                                         {
-                                            this.props.lang === 'ori' ?
-                                                item.ori
-                                                :
-                                                item.cn?item.cn:item.ori
+                                            item[this.props.lang]
                                         }
                                     </Paragraph>)
                                 } else if (item.type === 'img') {
-                                    return (<img alt="illustration" src={item.src} style={{width: 200, height:150}}/>)
+                                    return (<img alt="illustration" src={item.src}/>)
                                 } else if (item.type === 'ul') {
                                     return (<ul>
                                         {
-                                            this.props.lang === 'ori' ?
-                                                item.ori.map(i => {
-                                                    return (
-                                                        <li>{i}</li>
-                                                    )
-                                                })
-                                                :
-                                                item.cn.map(i => {
-                                                    return (
-                                                        <li>{i}</li>
-                                                    )
-                                                })
+                                            item[this.props.lang].map(i => {
+                                                return (
+                                                    <li>{i}</li>
+                                                )
+                                            })
                                         }
                                     </ul>)
                                 } else if (item.type === 'blockquote') {
                                     return (<blockquote>{
-                                        this.props.lang === 'ori' ?
-                                            item.ori
-                                            :
-                                            item.cn?item.cn:item.ori
+                                        item[this.props.lang]
                                     }</blockquote>)
                                 } else if (item.type === 'h2') {
                                     return (<Title level={4}>{
-                                        this.props.lang === 'ori' ?
-                                            item.ori
-                                            :
-                                            item.cn?item.cn:item.ori
+                                        item[this.props.lang]
                                     }</Title>)
                                 } else {
                                     return (<div/>)
@@ -121,25 +102,24 @@ class MyArticle extends Component {
                                                 title={
                                                     <div className="subtitle"
                                                          style={{marginLeft: "-5px", marginTop: "-5px"}}>
-                                                        {this.props.lang === 'ori' ?
-                                                            live.liveTitle.ori
-                                                            : (live.liveTitle.cn ? live.liveTitle.cn : live.liveTitle.ori)
+                                                        {
+                                                            live.liveTitle[this.props.lang]
                                                         }
                                                     </div>
                                                 }
                                                 ghost
                                                 size={"small"}
                                                 extra={
-                                                    this.state.collapseIconVisibleList[idx]?
-                                                    <RightOutlined
-                                                        rotate={!this.state.collapsedList[idx] ? 90 : undefined}
-                                                        onClick={() => {
-                                                            let {collapsedList} = this.state;
-                                                            collapsedList[idx] = !collapsedList[idx];
-                                                            this.setState({collapsedList});
-                                                        }}
-                                                    />
-                                                    : ""
+                                                    this.state.collapseIconVisibleList[idx] ?
+                                                        <RightOutlined
+                                                            rotate={!this.state.collapsedList[idx] ? 90 : undefined}
+                                                            onClick={() => {
+                                                                let {collapsedList} = this.state;
+                                                                collapsedList[idx] = !collapsedList[idx];
+                                                                this.setState({collapsedList});
+                                                            }}
+                                                        />
+                                                        : ""
                                                 }
                                                 style={{margin: "0px"}}
                                                 // defaultCollapsed={true}
