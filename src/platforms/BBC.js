@@ -48,22 +48,22 @@ class BBCApp extends Component {
                             const Component = React.lazy(() => import('../components/cards/' + news[0].newsType));
                             return (
                                 // <ProCard ghost>
-                                        <ProCard ghost gutter={[0, 8]} direction="column">
-                                            <ProCard ghost>
-                                            <React.Suspense fallback={<div>loading...</div>}>
+                                <ProCard ghost gutter={[0, 8]} direction="column">
+                                    <ProCard ghost>
+                                        <React.Suspense fallback={<div>loading...</div>}>
 
                                             <Component key={news[0]._id} news={news[0]}/>
-                                            </React.Suspense>
+                                        </React.Suspense>
 
-                                            </ProCard>
-                                            <ProCard ghost>
-                                            <React.Suspense fallback={<div>loading...</div>}>
+                                    </ProCard>
+                                    <ProCard ghost>
+                                        <React.Suspense fallback={<div>loading...</div>}>
 
                                             <Component key={news[1]._id} news={news[1]}/>
                                         </React.Suspense>
-                                            </ProCard>
+                                    </ProCard>
 
-                        </ProCard>
+                                </ProCard>
                                 // </ProCard>
 
                             )

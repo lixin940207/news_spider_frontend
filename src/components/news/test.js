@@ -14,7 +14,7 @@ class TestApp extends Component {
                 <ProCard gutter={[16, 16]} className="card-container" layout="center" wrap direction='row'
                          key="test-news">
                     <ProCard colSpan={18} layout="left" ghost>
-                        <CardExpanded />
+                        <CardExpanded/>
                     </ProCard>
                     <ProCard colSpan={6} ghost gutter={[0, 16]} direction="column">
                         <ProCard style={{height: "263px"}}></ProCard>

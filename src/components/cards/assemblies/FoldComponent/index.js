@@ -12,16 +12,16 @@ class FoldComponent extends Component {
         return (
             <div
                 style={{
-                float: "right",
-                display: "flex",
-                position: "absolute",
-                bottom: "10px",
-                right: "10px",
-                width: "50px",
-                alignItems: "center"
-            }}
+                    float: "right",
+                    display: "flex",
+                    position: "absolute",
+                    bottom: "10px",
+                    right: "10px",
+                    width: "50px",
+                    alignItems: "center"
+                }}
             >
-                <div style={{fontSize: "11px", float: "left"}} onClick={this.props.handleFold}>收起</div>
+                <div style={{fontSize: "11px", float: "left"}} onClick={this.props.handleFold}>less</div>
                 <MyIcon type="icon-lixina-expand_less1" style={{fontSize: "23px"}}/>
             </div>
 
