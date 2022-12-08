@@ -6,10 +6,12 @@ module.exports = {
         'FranceNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_france_news`,
         'WorldNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_world_news`,
         'ChinaNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_china_news`,
+        'CovidNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_covid_news`,
+        'WarNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_war_news`,
         'BBCAPI': `http://${news_spider_api_host}:${news_spider_api_port}/bbc`,
         'LeMondeAPI': `http://${news_spider_api_host}:${news_spider_api_port}/lemonde`,
         'NYTimesAPI': `http://${news_spider_api_host}:${news_spider_api_port}/nytimes`,
         'LeFigaroAPI': `http://${news_spider_api_host}:${news_spider_api_port}/lefigaro`,
-        'TechNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_tech_news`
+        'TechNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_tech_news`,
     }
 }

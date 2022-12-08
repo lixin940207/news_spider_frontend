@@ -6,8 +6,9 @@ import FranceNewsApp from "../news/france_news";
 import WorldNewsApp from "../news/world_news";
 import ChinaNewsApp from "../news/china_news";
 import MyIcon from "../MyIcon";
-import TestApp from "../news/test";
 import TechNewsApp from "../news/tech_news";
+import CovidNewsApp from "../news/covid_news";
+import WarNewsApp from "../news/war_news";
 
 const {TabPane} = Tabs;
 
@@ -93,9 +94,10 @@ class MainComponent extends Component {
                             <TechNewsApp lang={this.state.lang}/>
                         </TabPane>
                         <TabPane tab={<span> <MyIcon type="icon-lixina-bingdu1"/>Covid</span>} key="tab4">
+                            <CovidNewsApp lang={this.state.lang}/>
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Social Media</span>} key="tab5">
-                            <TestApp/>
+                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Russia-Ukraine war</span>} key="tab5">
+                            <WarNewsApp lang={this.state.lang}/>
                         </TabPane>
 
                     </Tabs>
