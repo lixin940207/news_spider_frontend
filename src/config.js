@@ -8,6 +8,7 @@ module.exports = {
         'ChinaNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_china_news`,
         'CovidNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_covid_news`,
         'WarNewsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/latest_war_news`,
+        'HotTopicsAPI': `http://${news_spider_api_host}:${news_spider_api_port}/topics_of_today`,
         'BBCAPI': `http://${news_spider_api_host}:${news_spider_api_port}/bbc`,
         'LeMondeAPI': `http://${news_spider_api_host}:${news_spider_api_port}/lemonde`,
         'NYTimesAPI': `http://${news_spider_api_host}:${news_spider_api_port}/nytimes`,

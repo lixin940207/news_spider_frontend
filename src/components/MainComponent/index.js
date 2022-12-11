@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {PageHeader, Tabs, Button, Tag, Tooltip, Dropdown} from 'antd';
+import {PageHeader, Tabs, Button, Tooltip, Dropdown} from 'antd';
 import {MailOutlined, SearchOutlined, TranslationOutlined} from '@ant-design/icons';
 import Text from "antd/es/typography/Text";
 import FranceNewsApp from "../news/france_news";
@@ -9,6 +9,7 @@ import MyIcon from "../MyIcon";
 import TechNewsApp from "../news/tech_news";
 import CovidNewsApp from "../news/covid_news";
 import WarNewsApp from "../news/war_news";
+import HotTopics from "../HotTopics";
 
 const {TabPane} = Tabs;
 
@@ -104,19 +105,8 @@ class MainComponent extends Component {
                 }
             >
                 <div>
-                    <Text>今日热门：</Text>
-                    <Tag color="#557571" style={{borderRadius: "3px "}}>Euro Cup 2021</Tag>
-                    <Tag color="#D49A89">
-                        <div style={{fontColor: "red"}}>Ronald Acuna</div>
-                    </Tag>
-                    <Tag color="#F7D1BA">Australia First Death</Tag>
-                    <Tag color="#557571">orange</Tag>
-                    <Tag color="#D49A89">gold</Tag>
-                    <Tag color="#ECB390">lime</Tag>
-                    <Tag color="#557571">green</Tag>
-                    <Tag color="#D49A89">cyan</Tag>
-                    <Tag color="#D4E2D4">blue</Tag>
-                    <Tag color="#557571">geekblue</Tag>
+                    <Text>Today's Topics：</Text>
+                    <HotTopics count={10}/>
                 </div>
             </PageHeader>
         )
