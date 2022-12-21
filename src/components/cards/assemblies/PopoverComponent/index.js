@@ -24,7 +24,7 @@ class PopoverComponent extends Component {
                                                          content={
                                                              <Paragraph>
                                                                  {
-                                                                     this.props.article.abstract ?
+                                                                     this.props.article && this.props.article.abstract ?
                                                                          this.props.article.abstract[this.props.lang]
                                                                          : ""
                                                                  }
