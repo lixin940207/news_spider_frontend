@@ -388,7 +388,7 @@ class BaseNewsApp extends Component {
         const {loading} = this.state;
         return (
             <div className="tab-main"
-                 style={{height: "calc(100vh - 150px)", overflowY: 'auto', overflowX: 'hidden'}}
+                 style={{height: "calc(100vh - 185px)", overflowY: 'auto', overflowX: 'hidden'}}
                  ref={this.scrollParentRef}
                  onLoad={this.loadScroll}
             >

@@ -9,7 +9,8 @@ const {Paragraph} = Typography;
 
 class PopoverComponent extends Component {
     static propTypes = {
-        article: PropTypes.object.isRequired, lang: PropTypes.string,
+        article: PropTypes.object.isRequired,
+        lang: PropTypes.string,
     }
 
     render() {
@@ -23,8 +24,8 @@ class PopoverComponent extends Component {
                                                          content={
                                                              <Paragraph>
                                                                  {
-                                                                     this.props.article ?
-                                                                         this.props.article.abstract
+                                                                     this.props.article.abstract ?
+                                                                         this.props.article.abstract[this.props.lang]
                                                                          : ""
                                                                  }
                                                              </Paragraph>}

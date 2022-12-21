@@ -64,8 +64,8 @@ class MainComponent extends Component {
             <PageHeader
                 className="site-page-header-responsive"
                 title="Bread News"
-                subTitle="All you are interested in"
-                avatar={{src: process.env.PUBLIC_URL + 'Illustration_sans_titre.png', size: 100}}
+                subTitle="Read the world in your breakfast"
+                avatar={{src: process.env.PUBLIC_URL + 'Illustration_sans_titre.png', size: 70, shape: "square"}}
                 extra={[
                     <Tooltip title="search">
                         <Button key="button1" type="primary" shape="circle" icon={<SearchOutlined/>}/>
@@ -100,7 +100,6 @@ class MainComponent extends Component {
                         <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Russia-Ukraine war</span>} key="tab5">
                             <WarNewsApp lang={this.state.lang}/>
                         </TabPane>
-
                     </Tabs>
                 }
             >
