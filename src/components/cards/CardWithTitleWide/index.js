@@ -13,7 +13,7 @@ class CardWithTitleWide extends Component {
     }
 
     render() {
-        return (<ProCard bordered style={{height: "128px", width: "263px", position: "relative"}}>
+        return (<ProCard bordered hoverable style={{height: "128px", width: "263px", position: "relative"}}>
             <PopoverComponent article={this.props.news.article} lang={this.props.lang}>
                 <div style={{margin: "-5px", marginTop: "-10px"}}>
                     <HeadlineComponent news={this.props.news} lang={this.props.lang}/>

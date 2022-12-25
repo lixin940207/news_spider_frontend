@@ -16,7 +16,7 @@ class CardWithTitleIntro extends Component {
     }
 
     render() {
-        return (<ProCard className="cardStyle" bordered>
+        return (<ProCard className="cardStyle" bordered hoverable>
             <PopoverComponent article={this.props.news.article} lang={this.props.lang}>
                 <div style={{margin: "-5px"}}>
                     <HeadlineComponent news={this.props.news} lineNumber={3} lang={this.props.lang}/>

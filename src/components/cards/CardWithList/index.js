@@ -16,7 +16,7 @@ class CardWithList extends Component {
 
     render() {
         return (
-            <ProCard bordered className="cardStyle">
+            <ProCard bordered hoverable className="cardStyle">
                 <div style={{margin: "-5px", marginTop: "-10px"}}>
                     {this.props.news.title ?
                         <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/> : ''}

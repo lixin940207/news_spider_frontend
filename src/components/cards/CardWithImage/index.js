@@ -21,7 +21,7 @@ class CardWithImage extends Component {
     // }
 
     render() {
-        return (<ProCard className="cardStyle" style={{position: "relative"}} colSpan={6} bordered>
+        return (<ProCard className="cardStyle" hoverable style={{position: "relative"}} colSpan={6} bordered>
             <PopoverComponent article={this.props.news.article} lang={this.props.lang}>
                 <div style={{margin: "-3px"}}>
                     <ImageComponent news={this.props.news}/>

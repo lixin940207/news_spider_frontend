@@ -15,7 +15,7 @@ class PopoverComponent extends Component {
 
     render() {
         return (<>
-            {this.props.article !== undefined ? <Popover trigger={"click"} placement="right"
+            {this.props.article && this.props.article.abstract ? <Popover trigger={"click"} placement="right"
                                                          overlayStyle={{
                                                              width: "400px",
                                                              maxHeight: "500px",

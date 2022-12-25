@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import '../index.less'
 import MyArticle from "../assemblies/MyArticle";
 import FoldComponent from "../assemblies/FoldComponent";
+import FooterComponent from "../assemblies/FooterComponent";
 
 const {Paragraph, Title} = Typography;
 
@@ -43,7 +44,7 @@ class CardExpanded extends Component {
 
     render() {
         return (
-            <ProCard ghost style={{position: "relative"}} bordered layout="center" direction="row">
+            <ProCard ghost hoverable style={{position: "relative"}} bordered layout="center" direction="row">
                 <ProCard style={{height: "542px"}} colSpan={10}>
                     <Image style={{margin: "5px", height: "180px", width: "275px", borderRadius: "5px"}}
                            preview={false}
@@ -61,6 +62,7 @@ class CardExpanded extends Component {
                                 ""
                         }
                     </Paragraph>
+                    <FooterComponent news={this.props.news}/>
                 </ProCard>
                 <ProCard style={{marginLeft: "-30px", width: "auto", height: "542px"}}>
                     <div style={{height: "480px", overflowY: "scroll", marginRight: "-25px"}}>

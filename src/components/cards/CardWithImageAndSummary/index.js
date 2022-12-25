@@ -21,7 +21,7 @@ class CardWithImageAndSubtitle extends Component {
 
     render() {
         return (
-            <ProCard className="wideCardStyle" ghost bordered layout="center" direction="row">
+            <ProCard hoverable className="wideCardStyle" ghost bordered layout="center" direction="row">
                 <ProCard className="cardStyle">
                     <PopoverComponent article={this.props.news.article} lang={this.props.lang}>
                         <div style={{margin: "-5px"}}>

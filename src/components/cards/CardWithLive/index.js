@@ -16,7 +16,7 @@ class CardWithLive extends Component {
 
     render() {
         return (
-            <ProCard bordered className="cardStyle"
+            <ProCard bordered hoverable className="cardStyle"
                      style={{overflowY: "hidden", overflowX: 'hidden', position: "relative"}}>
                 <div style={{marginTop: "-5px", marginLeft: "-5px", marginRight: "-5px"}}>
                     <HeadlineComponent news={this.props.news} lineNumber={2} lang={this.props.lang}/>

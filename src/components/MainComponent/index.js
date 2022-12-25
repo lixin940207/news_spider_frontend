@@ -97,7 +97,7 @@ class MainComponent extends Component {
                         <TabPane tab={<span> <MyIcon type="icon-lixina-bingdu1"/>Covid</span>} key="tab4">
                             <CovidNewsApp lang={this.state.lang}/>
                         </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>Russia-Ukraine war</span>} key="tab5">
+                        <TabPane tab={<span> <MyIcon type="icon-lixinflight"/>Russia-Ukraine War</span>} key="tab5">
                             <WarNewsApp lang={this.state.lang}/>
                         </TabPane>
                     </Tabs>
