@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Tag} from "antd";
+import {Button, Tag} from "antd";
 import axios from "axios";
 import {APIs} from "../../config";
 import PropTypes from "prop-types";
@@ -12,6 +12,7 @@ class HotTopics extends Component {
     static propTypes = {
         lang: PropTypes.string,
         count: PropTypes.number,
+        add: PropTypes.func,
     }
 
     fetchData = (count, callback) => {
@@ -48,7 +49,12 @@ class HotTopics extends Component {
         return (
             this.state.topics.map((topic, idx) => {
                 return (
-                    <Tag color={colors[idx % 10]} style={{borderRadius: "3px "}}>{topic}</Tag>
+                    <Tag color={colors[idx % 10]} style={{borderRadius: "3px"}}>
+                        <Button block ghost type='text' size='small'
+                                onClick={(event) => this.props.add(event, topic, 'topic_news')}>
+                            <div style={{fontSize: 12, color: 'white'}}>{topic}</div>
+                        </Button>
+                    </Tag>
                 )
             })
         )

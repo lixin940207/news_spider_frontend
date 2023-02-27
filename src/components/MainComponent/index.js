@@ -1,27 +1,101 @@
 import React, {Component} from 'react';
-import {PageHeader, Tabs, Button, Tooltip, Dropdown} from 'antd';
-import {MailOutlined, SearchOutlined, TranslationOutlined} from '@ant-design/icons';
+import {PageHeader, Tabs, Button, Tooltip, Dropdown, Input} from 'antd';
+import Icon, {MailOutlined, SearchOutlined, TranslationOutlined} from '@ant-design/icons';
+import styled from 'styled-components'
+import {ReactComponent as PeaceSvg} from '../../peace-flag-country-ukrain-svgrepo-com.svg'
+import {ReactComponent as FinanceSvg} from '../../cash-money-svgrepo-com.svg'
 import Text from "antd/es/typography/Text";
-import FranceNewsApp from "../news/france_news";
-import WorldNewsApp from "../news/world_news";
-import ChinaNewsApp from "../news/china_news";
 import MyIcon from "../MyIcon";
-import TechNewsApp from "../news/tech_news";
-import CovidNewsApp from "../news/covid_news";
-import WarNewsApp from "../news/war_news";
 import HotTopics from "../HotTopics";
 
+const {Search} = Input;
 const {TabPane} = Tabs;
 
+const RoundSearch = styled(Input.Search)`
+  .ant-input {
+    border-radius: 25px;
+  }
+  .ant-btn-primary {
+    border-radius: 50px;
+  }
+`;
+
 class MainComponent extends Component {
+
+    newTabIndex = 7;
 
     state = {
         lang: undefined,
         langButtonType: "default",
+        activeKey: '1',
+        panes: [
+            {title: 'France', newsApp: 'france_news', icon: "icon-lixinfrance", closable: false, key: '1'},
+            {title: 'World', newsApp: 'world_news', icon: "icon-lixina-shijie1", closable: false, key: '2'},
+            {title: 'China', newsApp: 'china_news', icon: "icon-lixinchina", closable: false, key: '3'},
+            {title: 'High Tech', newsApp: 'tech_news', icon: "icon-lixintwitter", closable: false, key: '4'},
+            {
+                title: 'Finance',
+                newsApp: 'finance_news',
+                customIcon: FinanceSvg,
+                size: '16px',
+                closable: false,
+                key: '5'
+            },
+            {title: 'Covid', newsApp: 'covid_news', icon: "icon-lixina-bingdu1", closable: false, key: '6'},
+            {
+                title: 'Russia-Ukraine War',
+                newsApp: 'war_news',
+                customIcon: PeaceSvg,
+                size: '18px',
+                closable: false,
+                key: '7'
+            },
+        ],
+        searchBoxActive: false,
+    }
+    onChange = activeKey => {
+        this.setState({activeKey});
+    };
+
+    onEdit = (targetKey, action) => {
+        this[action](targetKey);
+    };
+
+    add = (event, title, newsApp) => {
+        // if (title.trim() === "") return;
+        const {panes} = this.state;
+        this.newTabIndex++;
+        const activeKey = `${this.newTabIndex}`;
+        panes.push({title, key: activeKey, newsApp, closable: true, icon: ""});
+        this.setState({panes, activeKey});
+    };
+
+    remove = targetKey => {
+        let {activeKey} = this.state;
+        let lastIndex;
+        this.state.panes.forEach((pane, i) => {
+            if (pane.key === targetKey) {
+                lastIndex = i - 1;
+            }
+        });
+        const panes = this.state.panes.filter(pane => pane.key !== targetKey);
+        if (panes.length && activeKey === targetKey) {
+            if (lastIndex >= 0) {
+                activeKey = panes[lastIndex].key;
+            } else {
+                activeKey = panes[0].key;
+            }
+        }
+        this.setState({panes, activeKey});
+    };
+
+
+    handleLanguageOnClick = (lang) => {
+        this.setState({lang, langButtonType: "primary"});
     }
 
-    handleOnClick = (lang) => {
-        this.setState({lang, langButtonType: "primary"});
+    handleSearchOnClick = () => {
+        this.setState({searchBoxActive: !this.state.searchBoxActive})
     }
 
     render() {
@@ -29,7 +103,7 @@ class MainComponent extends Component {
             {
                 key: 'fr',
                 label: (
-                    <button onClick={() => this.handleOnClick('fr')}>
+                    <button onClick={() => this.handleLanguageOnClick('fr')}>
                         French
                     </button>
                 ),
@@ -37,7 +111,7 @@ class MainComponent extends Component {
             {
                 key: 'en',
                 label: (
-                    <button onClick={() => this.handleOnClick('en')}>
+                    <button onClick={() => this.handleLanguageOnClick('en')}>
                         English
                     </button>
                 ),
@@ -45,7 +119,7 @@ class MainComponent extends Component {
             {
                 key: 'zh',
                 label: (
-                    <button onClick={() => this.handleOnClick('zh')}>
+                    <button onClick={() => this.handleLanguageOnClick('zh')}>
                         Chinese
                     </button>
                 ),
@@ -53,13 +127,13 @@ class MainComponent extends Component {
             {
                 key: 'default',
                 label: (
-                    <button onClick={() => this.handleOnClick(undefined)}>
+                    <button onClick={() => this.handleLanguageOnClick(undefined)}>
                         default
                     </button>
                 ),
             },
         ];
-        // const lang_attribute = { lang: this.state.lang }
+
         return (
             <PageHeader
                 className="site-page-header-responsive"
@@ -67,45 +141,60 @@ class MainComponent extends Component {
                 subTitle="Read the world in your breakfast"
                 avatar={{src: process.env.PUBLIC_URL + 'Illustration_sans_titre.png', size: 70, shape: "square"}}
                 extra={[
-                    <Tooltip title="search">
-                        <Button key="button1" type="primary" shape="circle" icon={<SearchOutlined/>}/>
-                    </Tooltip>,
+                    this.state.searchBoxActive ?
+                        <RoundSearch placeholder="input search text"
+                                     enterButton
+                                     onSearch={(value, event) => this.add(event, value, 'search_news')}/>
+                        :
+                        <Button key="button1"
+                                type="primary"
+                                shape="circle"
+                                icon={<SearchOutlined/>}
+                                onClick={this.handleSearchOnClick}
+                        />,
                     <Dropdown menu={{
                         items,
                     }} placement="bottom">
                         <Button key="button2" type={this.state.langButtonType} shape="circle"
                                 icon={<TranslationOutlined/>}/>
-                    </Dropdown>
-                    ,
+                    </Dropdown>,
                     <Button key="button3" shape="circle" icon={<MailOutlined/>}/>,
                 ]}
                 footer={
-                    <Tabs defaultActiveKey="1">
-                        <TabPane style={{backgroundColor: "#F4F4F4"}}
-                                 tab={<span> <MyIcon type="icon-lixinfrance"/>France</span>} key="tab1">
-                            <FranceNewsApp lang={this.state.lang}/>
-                        </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixinchina"/>China</span>} key="tab2">
-                            <ChinaNewsApp lang={this.state.lang}/>
-                        </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixina-shijie1"/>World</span>} key="tab3">
-                            <WorldNewsApp lang={this.state.lang}/>
-                        </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixintwitter"/>High Tech</span>} key="tab6">
-                            <TechNewsApp lang={this.state.lang}/>
-                        </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixina-bingdu1"/>Covid</span>} key="tab4">
-                            <CovidNewsApp lang={this.state.lang}/>
-                        </TabPane>
-                        <TabPane tab={<span> <MyIcon type="icon-lixinflight"/>Russia-Ukraine War</span>} key="tab5">
-                            <WarNewsApp lang={this.state.lang}/>
-                        </TabPane>
+                    <Tabs defaultActiveKey="1" activeKey={this.state.activeKey} onTabClick={(key) => this.setState({activeKey: key})}>
+                        {
+                            this.state.panes.map(pane => {
+                                    const Component = React.lazy(() => import('../news/' + pane.newsApp));
+                                    return (
+                                        <TabPane
+                                            tab={
+                                                <span>
+                                                    {
+                                                        pane.icon === undefined ?
+                                                            <Icon component={pane.customIcon}
+                                                                  style={{fontSize: pane.size}}/>
+                                                            :
+                                                            <MyIcon type={pane.icon}/>
+                                                    }
+                                                    {pane.title}
+                                                </span>
+                                            }
+                                            closable={pane.closable}
+                                            key={pane.key}>
+                                            <React.Suspense fallback={<div>...</div>}>
+                                                <Component lang={this.state.lang} topic={pane.title}/>
+                                            </React.Suspense>
+                                        </TabPane>
+                                    )
+                                }
+                            )
+                        }
                     </Tabs>
                 }
             >
                 <div>
                     <Text>Today's Topics：</Text>
-                    <HotTopics count={10}/>
+                    <HotTopics count={10} add={this.add}/>
                 </div>
             </PageHeader>
         )
